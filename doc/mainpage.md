@@ -1,5 +1,5 @@
-Introduction {#mainpage}
-============
+Fitting against SAXS data with FoXS and MultiFoXS {#mainpage}
+=================================================
 
 Some proteins or their complexes can be characterized using small angle X-ray
 (SAXS) experiments. SAXS differs from X-ray crystallography in that it is
