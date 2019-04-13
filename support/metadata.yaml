@@ -2,4 +2,3 @@ title: Fitting against SAXS data with FoXS and MultiFoXS
 description: >
     This covers using the FoXS and MultiFoXS tools in IMP to fit
     one or more structures against small angle X-ray (SAXS) data.
-show_in_index: false
