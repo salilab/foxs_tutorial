@@ -9,24 +9,20 @@ import subprocess
 import util
 import shutil
 
-TOPDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
+FOXSDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
                                       '..', 'multi_foxs', 'rpa'))
 
-DOCDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
-                                      '..', 'doc'))
+TOPDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 
 class Tests(unittest.TestCase):
     def test_rpa(self):
         """Test the MultiFoXS RPA example"""
         with util.temporary_directory() as td:
-            testdir = os.path.join(td, 'rpa')
-            shutil.copytree(TOPDIR, testdir)
-            cmds = list(util.get_shell_commands(os.path.join(DOCDIR,
-                                                             'multifoxs.md')))
-            for c in cmds:
-                print(c)
-                subprocess.check_call(c, shell=True, cwd=testdir)
+            topdir = os.path.join(td, 'top')
+            testdir = os.path.join(topdir, 'multi_foxs', 'rpa')
+            shutil.copytree(TOPDIR, topdir)
+            subprocess.check_call("./multifoxs.sh", shell=True, cwd=topdir)
             expected = ['cluster_representatives.txt',
                         'multi_state_model_1_1_1.dat',
                         'multi_state_model_1_2_1.dat',

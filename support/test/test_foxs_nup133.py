@@ -9,24 +9,20 @@ import subprocess
 import util
 import shutil
 
-TOPDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
-                                      '..', 'foxs', 'nup133'))
+FOXSDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
+                                       '..', 'foxs', 'nup133'))
 
-DOCDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..',
-                                      '..', 'doc'))
+TOPDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..'))
 
 
 class Tests(unittest.TestCase):
     def test_nup133(self):
         """Test the FoXS Nup133 example"""
         with util.temporary_directory() as td:
-            testdir = os.path.join(td, 'nup133')
-            shutil.copytree(TOPDIR, testdir)
-            cmds = list(util.get_shell_commands(os.path.join(DOCDIR,
-                                                             'foxs.md')))
-            for c in cmds:
-                print(c)
-                subprocess.check_call(c, shell=True, cwd=testdir)
+            topdir = os.path.join(td, 'top')
+            testdir = os.path.join(topdir, 'foxs', 'nup133')
+            shutil.copytree(TOPDIR, topdir)
+            subprocess.check_call("./foxs.sh", shell=True, cwd=topdir)
             with open(os.path.join(testdir, '3KFO_23922_merge.dat')) as fh:
                 lines = fh.readlines()
             self.assertIn('Chi^2 = 8.76', lines[1])
@@ -45,9 +41,9 @@ class Tests(unittest.TestCase):
         with util.temporary_directory() as td:
             testdir = os.path.join(td, 'nup133')
             shutil.copytree(TOPDIR, testdir)
-            c = 'python add-missing-residues.py'
-            print(c)
-            subprocess.check_call(c, shell=True, cwd=testdir)
+            c = [sys.executable, 'add-missing-residues.py']
+            print(" ".join(c))
+            subprocess.check_call(c, shell=False, cwd=testdir)
             expected = ['3KFO-fill.ini', '3KFO-fill.rsr', '3KFO-fill.sch']
             for i in range(1,6):
                 for pattern in ('3KFO-fill.D0000000%d', '3KFO-fill.V9999000%d',
