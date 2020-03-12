@@ -40,7 +40,7 @@ class Tests(unittest.TestCase):
         """Test the Nup133 example Modeller script"""
         with util.temporary_directory() as td:
             testdir = os.path.join(td, 'nup133')
-            shutil.copytree(TOPDIR, testdir)
+            shutil.copytree(FOXSDIR, testdir)
             c = [sys.executable, 'add-missing-residues.py']
             print(" ".join(c))
             subprocess.check_call(c, shell=False, cwd=testdir)
