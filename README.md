@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/salilab/foxs_tutorial.svg?branch=master)](https://travis-ci.org/salilab/foxs_tutorial)
+[![Build Status](https://travis-ci.com/salilab/foxs_tutorial.svg?branch=master)](https://travis-ci.com/salilab/foxs_tutorial)
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/salilab/foxs_tutorial/master?filepath=index.ipynb)
 
 This tutorial covers using the FoXS and MultiFoXS tools in
