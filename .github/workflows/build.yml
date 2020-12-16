@@ -1,0 +1,35 @@
+name: build
+
+on:
+  push:
+  pull_request:
+  schedule:
+  - cron: "47 22 * * 0"  # Run at a random time weekly
+
+jobs:
+  build:
+
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [2.7, 3.8]
+        imp-branch: [master, develop]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+    - name: Install dependencies
+      run: |
+        sudo apt-get update -qq && sudo apt-get install -qq gnuplot
+    - name: Setup conda
+      env:
+        KEY_MODELLER: ${{ secrets.KEY_MODELLER }}
+      run: |
+        support/setup_travis.sh ~/conda ${{ matrix.imp-branch }} ${{ matrix.python-version }}
+    - name: Test
+      run: |
+        source ~/conda/bin/activate python${{ matrix.python-version }}
+        nosetests --exe support/test
