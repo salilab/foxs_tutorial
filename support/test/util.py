@@ -6,9 +6,9 @@ def get_shell_commands(md_file):
     with open(md_file) as fh:
         in_shell = False
         for line in fh:
-            if line.startswith('\code{.sh}'):
+            if line.startswith('\\code{.sh}'):
                 in_shell = True
-            elif line.startswith('\endcode'):
+            elif line.startswith('\\endcode'):
                 in_shell = False
             elif in_shell:
                 yield line.rstrip('\r\n')
