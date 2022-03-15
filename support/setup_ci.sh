@@ -9,7 +9,6 @@ fi
 
 imp_branch=$1
 python_version=$2
-temp_dir=$(mktemp -d)
 
 # get conda-forge, not main, packages
 conda config --remove channels defaults
@@ -20,8 +19,14 @@ else
   IMP_CONDA="imp"
 fi
 
-cd ${temp_dir}
+conda create --yes -q -n python${python_version} -c salilab python=${python_version} modeller ${IMP_CONDA}
+eval "$(conda shell.bash hook)"
+conda activate python${python_version}
 
-conda create --yes -q -n python${python_version} -c salilab python=${python_version} modeller nose ${IMP_CONDA}
-
-rm -rf ${temp_dir}
+if [ ${python_version} = "2.7" ]; then
+  # pytest-flake8 1.1.0 tries to import contextlib.redirect_stdout, which
+  # isn't present in Python 2
+  pip install pytest-cov coverage 'pytest-flake8<1.1'
+else
+  pip install pytest-cov coverage pytest-flake8
+fi
