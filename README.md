@@ -1,4 +1,4 @@
-[![Build Status](https://github.com/salilab/foxs_tutorial/workflows/build/badge.svg?branch=main)](https://github.com/salilab/foxs_tutorial/actions?query=workflow%3Abuild)
+[![Build Status](https://github.com/salilab/foxs_tutorial/actions/workflows/build.yml/badge.svg?branch=main)](https://github.com/salilab/foxs_tutorial/actions/workflows/build.yml)
 [![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/salilab/foxs_tutorial/blob/main/index-colab.ipynb)
 
 This tutorial covers using the FoXS and MultiFoXS tools in
