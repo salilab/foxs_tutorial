@@ -15,6 +15,8 @@ else
   IMP_CONDA="imp"
 fi
 
-conda install -n test --yes -q modeller pip ${IMP_CONDA}
+eval "$(conda shell.bash hook)"
+conda activate test
+conda install --yes -q modeller pip ${IMP_CONDA}
 
 pip install pytest-cov coverage
